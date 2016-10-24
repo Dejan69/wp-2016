@@ -34,6 +34,14 @@
       controllerAs: 'vm'
     });
     $log.debug('State second initialized');
+
+    $stateProvider.state('students', {
+      url: '/students',
+      templateUrl: 'app/c1/students.view.html',
+      controller: 'StudentsController',
+      controllerAs: 'vm'
+    });
+    $log.debug('State second initialized');
   }
 
   //x.nesto -> calling 'nesto' from undefined

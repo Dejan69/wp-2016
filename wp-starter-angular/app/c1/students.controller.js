@@ -3,14 +3,14 @@
 
   angular
     .module('wp-angular-starter')
-    .controller('GroupController', GroupController);
+    .controller('StudentsController', StudentsController);
 
-  GroupController.$inject = ['$log', 'GroupService'];
+  StudentsController.$inject = ['$log', 'GroupService', 'StudentService'];
 
   /* @ngInject */
-  function GroupController($log, GroupService) {
+  function StudentsController($log, GroupService, StudentService) {
     var vm = this;
-    vm.title = 'Group';
+    vm.title = 'Students';
     vm.save = save;
     vm.clear = clear;
     vm.edit = edit;
@@ -20,11 +20,18 @@
     vm.saveOkMsg = null;
     vm.saveErrMsg = null;
     vm.searchText = '';
-    vm.availableSizes = [20, 40];
+    vm.groups = [];
+    loadStudents();
     loadGroups();
 
     function loadGroups() {
       GroupService.getAll().then(function (data) {
+        vm.groups = data;
+      });
+    }
+
+    function loadStudents() {
+      StudentService.getAll().then(function (data) {
         vm.entities = data;
       });
     }
@@ -33,10 +40,10 @@
       vm.saveOkMsg = null;
       vm.saveErrMsg = null;
 
-      var promise = GroupService.save(vm.entity);
+      var promise = StudentService.save(vm.entity);
       promise.then(successCallback, errorCallback);
       function successCallback(data) {
-        loadGroups();
+        loadStudents();
         vm.saveOkMsg = "Group with id " + data.id + " is saved";
         clear();
       }
@@ -56,10 +63,10 @@
     }
 
     function remove(entity) {
-      GroupService
+      StudentService
         .remove(entity)
         .then(function () {
-          loadGroups();
+          loadStudents();
         });
     }
   }

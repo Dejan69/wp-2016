@@ -1,0 +1,63 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4>Add or update {{vm.title}}</h4>
+  </div>
+  <form ng-submit="vm.save()" name="form">
+    <div class="panel-body">
+
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control"
+               type="text"
+               ng-required="true"
+               ng-model="vm.entity.name">
+      </div>
+      <div class="form-group">
+        <label>Surname</label>
+        <input class="form-control"
+               type="text"
+               ng-required="true"
+               ng-model="vm.entity.surname">
+      </div>
+      <div class="form-group">
+        <label>Index number</label>
+        <input class="form-control" ng-required="true" ng-model="vm.entity.index" type="number">
+      </div>
+      <div class="form-group">
+        <label>Lab Group</label>
+        <ui-select ng-model="vm.entity.labGroup"
+                   title="Choose lab group">
+          <ui-select-match
+            placeholder="Select lab group...">
+            <span>{{$select.selected}}</span>
+          </ui-select-match>
+          <ui-select-choices
+            repeat="item in (vm.groups | filter:$select.search )"
+            position="auto">
+            {{item}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="panel-footer text-right">
+      <div class="panel panel-danger text-center text-danger" ng-show="vm.saveErrMsg">
+        {{vm.saveErrMsg}}
+      </div>
+      <div class="panel panel-success text-center text-success" ng-show="vm.saveOkMsg">
+        {{vm.saveOkMsg}}
+      </div>
+      <button class="btn btn-default" type="reset"
+              ng-click="vm.clear()">
+        <i class="fa fa-fw fa-refresh"></i>
+        Clear
+      </button>
+      <button class="btn btn-primary"
+              type="submit"
+              ng-disabled="form.$invalid">
+        <i class="fa fa-fw fa-save"></i>
+        Save
+      </button>
+    </div>
+
+  </form>
+</div>
