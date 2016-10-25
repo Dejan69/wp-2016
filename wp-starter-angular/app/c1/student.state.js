@@ -10,7 +10,7 @@
 
   function registerState($stateProvider) {
 
-    $stateProvider.state('group', {
+    $stateProvider.state('students', {
       url: '/students',
       templateUrl: 'app/c1/students.view.html',
       controller: 'StudentsController',

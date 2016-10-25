@@ -5,10 +5,10 @@
     .module('wp-angular-starter')
     .controller('StudentsController', StudentsController);
 
-  StudentsController.$inject = ['$log', 'GroupService', 'StudentService'];
+  StudentsController.$inject = ['$log', 'GroupService', 'StudentService', '$scope'];
 
   /* @ngInject */
-  function StudentsController($log, GroupService, StudentService) {
+  function StudentsController($log, GroupService, StudentService, $scope) {
     var vm = this;
     vm.title = 'Students';
     vm.save = save;
@@ -16,13 +16,29 @@
     vm.edit = edit;
     vm.remove = remove;
     vm.entity = {};
-    vm.entities = [];
+    $scope.entities = [];
+    $scope.tableDisplay = [];
     vm.saveOkMsg = null;
     vm.saveErrMsg = null;
     vm.searchText = '';
     vm.groups = [];
     loadStudents();
     loadGroups();
+
+    vm.getters={
+      name: function (value) {
+        return value;
+      },
+      surname: function (value) {
+        return value;
+      },
+      index: function (value) {
+        return value;
+      },
+      labGroup: function (value) {
+        return value;
+      }
+    }
 
     function loadGroups() {
       GroupService.getAll().then(function (data) {
@@ -31,8 +47,9 @@
     }
 
     function loadStudents() {
+      $scope.tableDisplay = [].concat($scope.entities);
       StudentService.getAll().then(function (data) {
-        vm.entities = data;
+        $scope.entities = data;
       });
     }
 
@@ -54,6 +71,7 @@
     }
 
     function clear() {
+      console.log(vm.entity);
       vm.entity = {};
     }
 
