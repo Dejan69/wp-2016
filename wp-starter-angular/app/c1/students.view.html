@@ -63,7 +63,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <table st-safe-src="entities" st-table="tableDisplay" ng-show="entities.length>0" class="table table-bordered table-striped">
+    <table st-table="entities" ng-if="tableDisplay.length>0" class="table table-bordered table-striped">
       <tr>
         <th st-sort="name">First Name</th>
         <th st-sort="surname">Surname</th>
@@ -72,7 +72,7 @@
         <th>Actions</th>
       </tr>
       <tr>
-        <th><input st-search="row.index" placeholder="search by index" type="search"/></th>
+        <th><input st-search="index" placeholder="search by index" type="search"/></th>
       </tr>
       <tr ng-repeat="row in entities">
         <td>{{row.name}}</td>
@@ -103,5 +103,6 @@
   </div>
 </div>
 <div class="row">
+  {{vm.entity.property}}
   <wp-input wp-label="someLabel" wp-type="text" wp-model="vm.entity.property" wp-focus="true"></wp-input>
 </div>

@@ -16,29 +16,14 @@
     vm.edit = edit;
     vm.remove = remove;
     vm.entity = {};
-    $scope.entities = [];
-    $scope.tableDisplay = [];
+    // $scope.entities = [];
+    // $scope.tableDisplay = [];
     vm.saveOkMsg = null;
     vm.saveErrMsg = null;
     vm.searchText = '';
     vm.groups = [];
     loadStudents();
     loadGroups();
-
-    vm.getters={
-      name: function (value) {
-        return value;
-      },
-      surname: function (value) {
-        return value;
-      },
-      index: function (value) {
-        return value;
-      },
-      labGroup: function (value) {
-        return value;
-      }
-    }
 
     function loadGroups() {
       GroupService.getAll().then(function (data) {
@@ -47,9 +32,11 @@
     }
 
     function loadStudents() {
-      $scope.tableDisplay = [].concat($scope.entities);
+      $scope.entities = [];
+      $scope.tableDisplay = [];
       StudentService.getAll().then(function (data) {
         $scope.entities = data;
+        $scope.tableDisplay = data;
       });
     }
 
