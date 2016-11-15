@@ -63,7 +63,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <table st-table="entities" ng-if="tableDisplay.length>0" class="table table-bordered table-striped">
+    <table st-table="vm.entities" ng-if="vm.tableDisplay.length>0" class="table table-bordered table-striped">
       <tr>
         <th st-sort="name">First Name</th>
         <th st-sort="surname">Surname</th>
@@ -74,7 +74,7 @@
       <tr>
         <th><input st-search="index" placeholder="search by index" type="search"/></th>
       </tr>
-      <tr ng-repeat="row in entities">
+      <tr ng-repeat="row in vm.entities">
         <td>{{row.name}}</td>
         <td>{{row.surname}}</td>
         <td>{{row.index}}</td>
@@ -101,8 +101,4 @@
       There are no students!
     </div>
   </div>
-</div>
-<div class="row">
-  {{vm.entity.property}}
-  <wp-input wp-label="someLabel" wp-type="number" wp-model="vm.entity.property" wp-focus="true"></wp-input>
 </div>
